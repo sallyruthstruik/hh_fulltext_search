@@ -1,5 +1,6 @@
 package core.text_processing;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -7,6 +8,8 @@ import java.util.Set;
  */
 public interface TextProcessorInterface {
     Set<String> processText(String text);
+
+    List<String> splitText(String text);
 
     String stem(String word);
 }

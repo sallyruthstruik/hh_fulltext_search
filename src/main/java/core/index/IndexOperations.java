@@ -20,7 +20,7 @@ class IndexOperations {
             else
                 out.addAll(temp);
         }
-        return out.iterator();
+        return out != null ? out.iterator() : null;
     }
 
     Iterator<Long> and(final List<Iterator<Long>> tokenIterators){
@@ -36,6 +36,6 @@ class IndexOperations {
             else
                 out.retainAll(temp);
         }
-        return out.iterator();
+        return out != null ? out.iterator() : null;
     }
 }

@@ -1,10 +1,12 @@
 package core.text_processing;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 enum LanguageType{
-    EN, RU;
+    EN, RU
 }
 
 /**
@@ -12,6 +14,7 @@ enum LanguageType{
  */
 public class TextProcessor implements TextProcessorInterface {
 
+    private static final int MINIMAL_WORD_LENGTH = 3;
     private TokenizerInterface tokenizer = new Tokenizer();
     private StemmerInterface stemmer = new Stemmer();
 
@@ -21,7 +24,20 @@ public class TextProcessor implements TextProcessorInterface {
         Set<String> tokens = new HashSet<String>();
 
         for(String word : tokenizer.tokenize(text)){
-            tokens.add(stem(word));
+            if(word.length() >= MINIMAL_WORD_LENGTH)
+                tokens.add(stem(word));
+        }
+
+        return tokens;
+    }
+
+    @Override
+    public List<String> splitText(String text){
+        List<String> tokens = new ArrayList<>();
+
+        for(String word : tokenizer.tokenize(text)){
+            if(word.length() >= MINIMAL_WORD_LENGTH)
+                tokens.add(stem(word));
         }
 
         return tokens;

@@ -11,9 +11,24 @@ public class DocumentIndex {
     private static long id;
     private static Map<Long, String> documents = new HashMap<Long, String>();
 
+    private DocumentIndex() {
+    }
+
+    public long getTotalDocumentsCount(){
+        return documents.size();
+    }
+
+
+    private static DocumentIndex INSTANCE;
+    public static DocumentIndex getInstance() {
+        if(INSTANCE == null)
+            INSTANCE = new DocumentIndex();
+        return INSTANCE;
+    }
+
     public long addToIndex(String doc){
         for(Map.Entry<Long, String> entry: documents.entrySet()){
-            if(entry.getValue() == doc)
+            if(entry.getValue().equals(doc))
                 return entry.getKey();
         }
         long newId = ++id;
